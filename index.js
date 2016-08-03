@@ -53,6 +53,11 @@ function initializeCLI(inventory) {
   // Load the package manifest to look through it for information
   var pkg = require(path.join(cwdDir, 'package.json'));
 
+  if (!pkg.bin || !pkg.bin[inventory.name]) {
+    // Let's make sure the command-line tool was defined in the module's manifest
+    throw new Error('Looks like your command-line tool name is not defined in your manifest');
+  }
+
   // This is a generic usage header that will prefix the help message
   var usage = "<command> [options]";
 

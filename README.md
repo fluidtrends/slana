@@ -10,11 +10,11 @@ Add Slana to your Node module as you would any other dependency:
 npm install --save slana
 ```
 
-# Quick Setup
+# Quick 2-Step Setup
 
-*STEP 1.*
+**STEP 1**
 
-The first thing you need to do is to add a ```bin``` entry to your module's ```package.json``` file that points to Slana. Like so:
+The first thing you need to do is to add a ```bin``` entry to your module's ```package.json``` file that points to Slana and that defines the name of your command-line tool. Like so:
 
 ```javascript
 "bin" : {
@@ -22,17 +22,17 @@ The first thing you need to do is to add a ```bin``` entry to your module's ```p
 }
 ```
 
-*STEP 2.*
+**STEP 2**
 
 Now simply add a ```slana.yaml``` file to your module's root directory, where you will tell Slana what your command-line tool does. Read on for the ```slana.yaml``` file format.
 
 # The slana.yaml file format
 
-The ```slana.yaml``` format is based on the YAML format and it has tow main sections: the ```name``` of your command-line tool and the ```commands``` your tool supports. Each of these sections are mandatory and if you forget to include either one of them, Slana will complain.
+The ```slana.yaml``` format is based on the YAML format and it has two main sections: the ```name``` of your command-line tool and the ```commands``` your tool supports. Each of these sections are mandatory and if you forget to include either one of them, Slana will complain.
 
 ## Name
 
-The ```name``` is a string that tells Slana what your command-line tool will be called. This will end up being the name of your binary executable. It could be the same as your module name, or it could be different. It's up to you.
+The ```name``` is a string that tells Slana what your command-line tool will be called. This will end up being the name of your binary executable. It could be the same as your module name, or it could be different. It's up to you. You must ensure that this name is defined in your list of binaries in your manifest, as outlined above in **STEP 1**.
 
 *Example:*
 
