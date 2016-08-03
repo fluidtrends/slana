@@ -1,4 +1,4 @@
-# slana
+# Slana
 
 Slana transforms your Node module into a command-line tool.
 
