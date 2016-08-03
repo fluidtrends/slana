@@ -243,9 +243,15 @@ function run () {
 }
 
 var slana = {
-  run: function() {
-    return run();
-  }
+  stopWithError: function(error) { return stopWithError(error) },
+  loadInventory: function() { return loadInventory() },
+  initializeCLI: function(inventory) { return initializeCLI(inventory) },
+  executeCommand: function(inventory, cli) { return executeCommand(inventory, cli) },
+  runCommandExecutor: function(command, executor) { return runCommandExecutor(command, executor) },
+  parseCommand: function(command, cli) { return parseCommand(command, cli) },
+  parseCommandOptions: function(command, cli) { return parseCommandOptions(command, cli) },
+  extractCommand: function(cli, inventory) { return extractCommand(cli, inventory) },
+  run: function() { return run() }
 }
 
 module.exports = slana;

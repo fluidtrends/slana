@@ -75,6 +75,37 @@ commands:
     type: boolean
 ```
 
+# The Slana API
+
+You can also include Slana into your tool, as a library.
+
+```javascript
+var slana = require('slana');
+```
+
+And then you can use any of the exported functions available:
+
+```
+stopWithError (error)
+loadInventory()
+initializeCLI(inventory)
+executeCommand(inventory, cli)
+runCommandExecutor(command, executor)
+parseCommand(command, cli)
+parseCommandOptions(command, cli)
+extractCommand(cli, inventory)
+run()
+```
+
+In most case you probably just wanna do this:
+
+```javascript
+#!/usr/bin/env node
+
+var slana = require('slana');
+slana.run();
+```
+
 # License
 
 Copyright (c) 2016 I. Dan Calinescu

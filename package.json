@@ -1,10 +1,10 @@
 {
   "name": "slana",
-  "version": "1.0.0",
-  "description": "Simple Tool For Creating Node Command Line Tools",
+  "version": "0.1.1",
+  "description": "Slana turns your Node module into a command-line tool.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified (yet)\" && exit 1"
   },
   "bin" : {
     "slana" : "bin/cli.js"
@@ -14,12 +14,18 @@
     "type": "git",
     "url": "git+https://github.com/idancali/slana.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "I. Dan Calinescu <idancalinescu@gmail.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/idancali/slana/issues"
   },
-  "homepage": "https://github.com/idancali/slana#readme",
+  "keywords": [
+    "cli",
+    "command-line",
+    "command-line tool",
+    "command line"
+  ],
+  "homepage": "https://github.com/idancali/slana",
   "dependencies": {
     "chalk": "^1.1.3",
     "fs-extra": "^0.30.0",
