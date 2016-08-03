@@ -1,0 +1,29 @@
+{
+  "name": "slana",
+  "version": "1.0.0",
+  "description": "Simple Tool For Creating Node Command Line Tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin" : {
+    "slana" : "bin/cli.js"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idancali/slana.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/idancali/slana/issues"
+  },
+  "homepage": "https://github.com/idancali/slana#readme",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "fs-extra": "^0.30.0",
+    "js-yaml": "^3.6.1",
+    "yargs": "^4.8.1"
+  }
+}

@@ -1,0 +1,27 @@
+name: greeter
+commands:
+- name: hello-world
+  description: This greets everyone in the world
+  executor: general-executor
+- name: hello
+  description: This commands says hello
+  executor: main-executor
+  options:
+  - name: name
+    alias: n
+    description: The person we want to greet
+    default: there
+    type: string
+- name: bye
+  description: This commands says goodbye
+  executor: main-executor
+  options:
+  - name: name
+    alias: n
+    description: The person we want to greet
+    default: now
+    type: string
+  - name: shout
+    alias: s
+    description: Shout the goodbye
+    type: boolean
