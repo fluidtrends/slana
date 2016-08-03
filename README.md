@@ -34,7 +34,7 @@ The ```slana.yaml``` format is based on the YAML format and it has two main sect
 
 The ```name``` is a string that tells Slana what your command-line tool will be called. This will end up being the name of your binary executable. It could be the same as your module name, or it could be different. It's up to you. You must ensure that this name is defined in your list of binaries in your manifest, as outlined above in **STEP 1**.
 
-*Example:*
+**Example:**
 
 ```yaml
 name: my-tool
@@ -44,7 +44,7 @@ name: my-tool
 
 The ```commands``` section is a list of one or more commands that you want your command-line tool to support. Each command has a ```name```, a ```description```, an ```executor``` and may or may not have ```options```.
 
-*Example:*
+**Example:**
 
 ```yaml
 commands:
@@ -85,7 +85,7 @@ var slana = require('slana');
 
 And then you can use any of the exported functions available:
 
-```
+```javascript
 stopWithError (error)
 loadInventory()
 initializeCLI(inventory)
@@ -97,7 +97,7 @@ extractCommand(cli, inventory)
 run()
 ```
 
-In most case you probably just wanna do this:
+In most cases you probably just wanna do this:
 
 ```javascript
 #!/usr/bin/env node
