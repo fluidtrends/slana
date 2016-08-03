@@ -1,5 +1,7 @@
 # Slana
 
+https://raw.githubusercontent.com/idancali/slana/master/logo.png
+
 Slana transforms your Node module into a command-line tool.
 
 # Installation
