@@ -1,8 +1,11 @@
 # Slana
 
-https://raw.githubusercontent.com/idancali/slana/master/logo.png
-
-Slana transforms your Node module into a command-line tool.
+<p align="center">
+  <a href="https://github.com/idancali/slana">
+    <img height="256" src="https://raw.githubusercontent.com/idancali/slana/master/logo.png">
+  </a>
+  <p align="center"> <b> Slana </b> Fattens Up Your Node Module With Delicious CLI Abilities. </p>
+</p>
 
 # Installation
 
