@@ -1,15 +1,17 @@
 {
   "name": "slana",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Slana turns your Node module into a command-line tool",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified (yet)\" && exit 1"
+    "savor": "./node_modules/.bin/savor",
+    "test": "./node_modules/.bin/savor test",
+    "lint": "./node_modules/.bin/savor lint",
+    "coverage": "./node_modules/.bin/savor coverage"
   },
-  "bin" : {
-    "slana" : "bin/cli.js"
+  "bin": {
+    "slana": "bin/cli.js"
   },
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/idancali/slana.git"
@@ -31,5 +33,8 @@
     "fs-extra": "^0.30.0",
     "js-yaml": "^3.6.1",
     "yargs": "^4.8.1"
+  },
+  "devDependencies": {
+    "savor": "^0.1.0"
   }
 }
