@@ -5,7 +5,7 @@
   <p align="center"> <b> Slana </b> Fattens Up Your Node Module With Delicious CLI Abilities. </p>
 </p>
 
-# Savor
+# Slana
 
 [![Version](https://img.shields.io/npm/v/slana.svg)](https://www.npmjs.com/package/slana)
 [![Build Status](https://travis-ci.org/idancali/slana.svg?branch=master)](https://travis-ci.org/idancali/slana)
@@ -39,15 +39,19 @@ Now simply add a ```slana.yaml``` file to your module's root directory, where yo
 # Example Usage
 
 **Friendly Help Usage**
+
 ![Example](https://raw.githubusercontent.com/idancali/slana/master/examples/main.1.gif)
 
 **Unknown Command Handling**
+
 ![Example](https://raw.githubusercontent.com/idancali/slana/master/examples/main.2.gif)
 
 **Command Execution**
+
 ![Example](https://raw.githubusercontent.com/idancali/slana/master/examples/main.3.gif)
 
 **Version Checking**
+
 ![Example](https://raw.githubusercontent.com/idancali/slana/master/examples/main.4.gif)
 
 # The slana.yaml file format

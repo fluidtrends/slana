@@ -26,7 +26,7 @@ function stopWithError(error) {
 function parseCommandOptions(command, cli) {
   var options = {};
 
-  command.options.forEach(option => {
+  command.options.forEach((option) => {
     if (option.name) {
       options[option.name] = {};
       options[option.name]["alias"]    = option.alias;
@@ -64,7 +64,7 @@ function extractCommand(cli, inventory) {
   // We want to make sure that the command we"ve just parsed is one we support,
   // so to do that we"re going to look through our inventory and see if we can find it
   var unknown = true;
-  inventory.commands.forEach(cmd => cmd.name === command.name ? unknown = false : null);
+  inventory.commands.forEach((cmd) => cmd.name === command.name ? unknown = false : null);
 
   if (unknown) {
     // If this command is one we don"t support, let"s just stop now with a nice
@@ -75,10 +75,10 @@ function extractCommand(cli, inventory) {
 
   // We"ve now got ourselves a parsed command that we support so let"s prepare it
   // for execution
-  inventory.commands.forEach(cmd => { cmd.name === command.name && cmd.options &&
+  inventory.commands.forEach((cmd) => { cmd.name === command.name && cmd.options &&
 
     // so first, let"s fill the command with all its expected options
-    cmd.options.forEach(option => command.options[option.name] = cli[option.name])});
+    cmd.options.forEach((option) => command.options[option.name] = cli[option.name])});
 
   // This command should now be ready for further manipulation
   return command;
@@ -211,7 +211,7 @@ function parseCommand (command, cli, dir) {
   // Looks like this command has options, so let"s parse them
   Object.assign(cmd.options, parseCommandOptions(command, cli));
 
-  Object.keys(cmd.options).forEach(optionKey => {
+  Object.keys(cmd.options).forEach((optionKey) => {
     if (cmd.options[optionKey].alias) {
       // Include the options and the alias, if any, in the command help message
       cmd.description = "[--" + out.bold(optionKey) + ", -" + out.bold(cmd.options[optionKey].alias) + "] " + cmd.description;
@@ -242,7 +242,7 @@ function executeCommand(inventory, cli, dir) {
 
   // This is the fun part; we"re going to look through our inventory, command by command,
   // and tell yargs what commands to look for, along with each command"s options, if any
-  inventory.commands.forEach(command => {
+  inventory.commands.forEach((command) => {
 
     if (!command.name) {
       // We don"t let commands without a name go through

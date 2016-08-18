@@ -18,8 +18,8 @@ function run (dir) {
 
 
 module.exports = {
-  stopWithError: function(error) { return main.stopWithError(error) },
-  loadInventory: function(dir) { return main.loadInventory(dir) },
+  stopWithError: function(error) { return main.stopWithError(error); },
+  loadInventory: function(dir) { return main.loadInventory(dir); },
   initializeCLI: function(inventory, dir) { return main.initializeCLI(inventory, dir) },
   executeCommand: function(inventory, cli, dir) { return main.executeCommand(inventory, cli, dir) },
   parseCommand: function(command, cli, dir) { return main.parseCommand(command, cli, dir) },

@@ -8,9 +8,9 @@ function sayGoodbye(name, shout) {
 }
 
 module.exports = function(command) {
-  if (command.name === 'hello') {
+  if (command.name === "hello") {
     sayHello(command.options.name);
-  } else if (command.name === 'bye') {
+  } else if (command.name === "bye") {
     sayGoodbye(command.options.name, command.options.shout);
   }
 };
