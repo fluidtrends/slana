@@ -36,6 +36,20 @@ The first thing you need to do is to add a ```bin``` entry to your module's ```p
 
 Now simply add a ```slana.yaml``` file to your module's root directory, where you will tell Slana what your command-line tool does. Read on for the ```slana.yaml``` file format.
 
+# Example Usage
+
+**Friendly Help Usage**
+![Example](https://raw.githubusercontent.com/idancali/slana/master/examples/main.1.gif)
+
+**Unknown Command Handling**
+![Example](https://raw.githubusercontent.com/idancali/slana/master/examples/main.2.gif)
+
+**Command Execution**
+![Example](https://raw.githubusercontent.com/idancali/slana/master/examples/main.3.gif)
+
+**Version Checking**
+![Example](https://raw.githubusercontent.com/idancali/slana/master/examples/main.4.gif)
+
 # The slana.yaml file format
 
 The ```slana.yaml``` format is based on the YAML format and it has two main sections: the ```name``` of your command-line tool and the ```commands``` your tool supports. Each of these sections are mandatory and if you forget to include either one of them, Slana will complain.
