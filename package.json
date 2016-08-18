@@ -4,10 +4,12 @@
   "description": "Slana turns your Node module into a command-line tool",
   "main": "index.js",
   "scripts": {
-    "savor": "./node_modules/.bin/savor",
-    "test": "./node_modules/.bin/savor test",
-    "lint": "./node_modules/.bin/savor lint",
-    "coverage": "./node_modules/.bin/savor coverage"
+    "savor": "savor",
+    "test": "savor test",
+    "lint": "savor lint",
+    "coverage": "savor coverage",
+    "coveralls": "savor coveralls",
+    "codacy": "savor codacy"
   },
   "bin": {
     "slana": "bin/cli.js"

@@ -1,0 +1,6 @@
+{
+  "name": "test",
+  "bin" : {
+    "greeter": "greeter"
+  }
+}

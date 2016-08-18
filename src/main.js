@@ -16,9 +16,6 @@ var fs = require('fs-extra');
 // Keep track of the root directory of our module,
 var rootDir = path.resolve(__dirname);
 
-// Keep track of the current directory
-var cwdDir = path.resolve(process.cwd());
-
 function stopWithError(error) {
   // Something went wrong at some point so we're going to stop right away,
   // print out a nice error message and signal the parent process that we
@@ -26,13 +23,35 @@ function stopWithError(error) {
   process.stderr.write(`\n${out.red('Error:')}\n  ${out.red('✗')} ${out.bold(error.message)}\n\n`) && process.exit(1);
 }
 
-function loadInventory() {
-  // First off, let's try to find and load the command inventory file
-  var inventory = yaml.safeLoad(fs.readFileSync(path.join(cwdDir, 'slana.yml')), 'utf8');
+function loadInventory(dir) {
+
+  if (!dir || !fs.existsSync(dir)) {
+    // We need to make sure the working directory exists before anything else
+    throw new Error('Looks like your working directory is invalid');
+  }
+
+  // This is the inventory file we're looking for
+  var file = path.join(dir, 'slana.yml');
+
+  if (!fs.existsSync(file)) {
+    // We need to make sure the file exists before attempting to load it
+    throw new Error('Looks like your Slana file is missing.');
+  }
+
+  // This is going to be our inventory content, if any
+  var inventory;
+
+  try {
+    // First off, let's try to find and load the command inventory file
+    inventory = yaml.safeLoad(fs.readFileSync(file), 'utf8');
+  } catch (e) {
+      // Catch yaml syntax errors
+      throw new Error('Looks like your Slana file is invalid.');
+  }
 
   if (!inventory) {
     // Add an extra sanity check
-    throw new Error('Looks like your Slana file is invalid.');
+    throw new Error('Looks like your Slana file is empty.');
   }
 
   if (!inventory.name) {
@@ -49,9 +68,31 @@ function loadInventory() {
   return inventory;
 }
 
-function initializeCLI(inventory) {
-  // Load the package manifest to look through it for information
-  var pkg = require(path.join(cwdDir, 'package.json'));
+function initializeCLI(inventory, dir) {
+
+  if (!dir || !fs.existsSync(dir)) {
+    // We need to make sure the working directory exists before anything else
+    throw new Error('Looks like your working directory is invalid');
+  }
+
+  // This is the manifest file we're looking for
+  var file = path.join(dir, 'package.json');
+
+  if (!fs.existsSync(file)) {
+    // We need to make sure the file exists before attempting to load it
+    throw new Error('Looks like your package file is missing.');
+  }
+
+  // This is going to be our package content, if any
+  var pkg;
+
+  try {
+    // Load the package manifest to look through it for information
+    pkg = require(file);
+  } catch (e) {
+      // Catch package syntax errors
+      throw new Error('Looks like your package file is invalid.');
+  }
 
   if (!pkg.bin || !pkg.bin[inventory.name]) {
     // Let's make sure the command-line tool was defined in the module's manifest
@@ -78,7 +119,12 @@ function initializeCLI(inventory) {
          epilog(`${out.gray('v')}${out.gray(pkg.version)}`);
 }
 
-function executeCommand(inventory, cli) {
+function executeCommand(inventory, cli, dir) {
+
+  if (!dir || !fs.existsSync(dir)) {
+    // We need to make sure the working directory exists before anything else
+    throw new Error('Looks like your working directory is invalid');
+  }
 
   // Keep track of all command executors
   var executors = {};
@@ -93,7 +139,7 @@ function executeCommand(inventory, cli) {
     }
 
     // Look for the command's properties, including options, if any
-    var cmd = parseCommand(command, cli);
+    var cmd = parseCommand(command, cli, dir);
 
     // The command is ready to be added to the parser
     cli.command(cmd.name, cmd.description, cmd.options);
@@ -105,29 +151,16 @@ function executeCommand(inventory, cli) {
   // We've got ourselves a command line now, so let's extract the command
   var command = extractCommand(cli, inventory);
 
-  if (!command) {
-    // The command was not extracted successfully
-    throw new Error(`Sorry, the command could not be proccessed. Please try again.`);
-  }
-
-  if (!executors[command.name]) {
-    // The command was not extracted successfully
-    throw new Error(`Make sure the ${out.green(command.name)} command has a valid command executor`);
-  }
-
   // And finally, let's execute it
   runCommandExecutor(command, executors[command.name])
 }
 
 function runCommandExecutor(command, executor) {
-  // Get ready to execute the command
-  process.stdout.write(`${out.green('➜ Executing command')} ${out.bold(command.name)} ${out.green('...')}\n\n`)
-
   // Let's attempt to execute the command now
   executor(command);
 }
 
-function parseCommand (command, cli) {
+function parseCommand (command, cli, dir) {
   if (!command.executor) {
     // We need a command executor, otherwise, there's nothing to execute
     throw new Error(`Make sure the ${out.green(command.name)} command has a valid command executor`);
@@ -139,7 +172,7 @@ function parseCommand (command, cli) {
 
   try {
     // Attempt to resolve the executor
-    cmd.executor = require(path.join(cwdDir, command.executor));
+    cmd.executor = require(path.join(dir, command.executor));
 
     if (typeof cmd.executor != 'function') {
       // We need an executor function, not something else (ie. an object)
@@ -204,6 +237,7 @@ function extractCommand(cli, inventory) {
     // just bail out with the usage message
     yargs.showHelp();
     process.exit(1);
+    return;
   }
 
   // We have successfully parsed the command line, so now let's construct a command;
@@ -233,32 +267,13 @@ function extractCommand(cli, inventory) {
   return command;
 }
 
-function run () {
-  try {
-
-    // We want to start off by investigating the inventory
-    var inventory = loadInventory();
-
-    // We start off by initializing from the inventory
-    var cli = initializeCLI(inventory);
-
-    // If the inventory is fine, we're going to execute the command
-    executeCommand(inventory, cli);
-  } catch (error) {
-    stopWithError(error);
-  }
-}
-
 var slana = {
   stopWithError: function(error) { return stopWithError(error) },
-  loadInventory: function() { return loadInventory() },
-  initializeCLI: function(inventory) { return initializeCLI(inventory) },
-  executeCommand: function(inventory, cli) { return executeCommand(inventory, cli) },
-  runCommandExecutor: function(command, executor) { return runCommandExecutor(command, executor) },
-  parseCommand: function(command, cli) { return parseCommand(command, cli) },
-  parseCommandOptions: function(command, cli) { return parseCommandOptions(command, cli) },
-  extractCommand: function(cli, inventory) { return extractCommand(cli, inventory) },
-  run: function() { return run() }
+  loadInventory: function(dir) { return loadInventory(dir) },
+  initializeCLI: function(inventory, dir) { return initializeCLI(inventory, dir) },
+  executeCommand: function(inventory, cli, dir) { return executeCommand(inventory, cli, dir) },
+  parseCommand: function(command, cli, dir) { return parseCommand(command, cli, dir) },
+  extractCommand: function(cli, inventory, dir) { return extractCommand(cli, inventory, dir) }
 }
 
 module.exports = slana;

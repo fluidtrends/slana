@@ -1,0 +1,4 @@
+name: greeter
+commands:
+- name: hello
+  executor: dummy

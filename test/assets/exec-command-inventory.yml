@@ -1,0 +1,19 @@
+name: greeter
+commands:
+- name: hey
+  executor: executor
+- name: hello
+  executor: executor
+  options:
+  - name: name
+    alias: n
+    description: The person we want to greet
+    default: there
+    type: string
+  - name: verbose
+    description: Whether the greeting should be longer
+    default: how are you today
+    type: string
+  - description: This is an option that will be ignore becase it is nameless
+    default: nothing
+    type: string
