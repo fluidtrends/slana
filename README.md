@@ -41,6 +41,8 @@ Now simply add a ```slana.yaml``` file to your module's root directory, where yo
 **Friendly Help Usage**
 
 ```
+$ greeter
+
 Usage:
  greeter <command> [options]
 
