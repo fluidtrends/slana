@@ -40,18 +40,77 @@ Now simply add a ```slana.yaml``` file to your module's root directory, where yo
 
 **Friendly Help Usage**
 
+```javascript
+Usage:
+ greeter <command> [options]
+
+Commands:
+  hello-world  This greets everyone in the world
+  hello        [--name, -n] This commands says hello
+  bye          [--quiet] [--shout, -s] [--name, -n] This command says goodbye
+
+Options:
+  --help     Show help  [boolean]
+  --version  Show version number  [boolean]
+  --name     The person we want to greet  [string] [default: "now"]
+  --shout    Shout the goodbye  [boolean]
+  --quiet    Say it quietly  [boolean]
+v1.0.0
+```
+
 ![Example](https://raw.githubusercontent.com/idancali/slana/master/examples/main.1.gif)
 
 **Unknown Command Handling**
+
+```javascript
+$ greeter jjj
+
+Usage:
+ greeter <command> [options]
+
+Commands:
+  hello-world  This greets everyone in the world
+  hello        [--name, -n] This commands says hello
+  bye          [--quiet] [--shout, -s] [--name, -n] This command says goodbye
+
+Options:
+  --help     Show help  [boolean]
+  --version  Show version number  [boolean]
+  --name     The person we want to greet  [string] [default: "now"]
+  --shout    Shout the goodbye  [boolean]
+  --quiet    Say it quietly  [boolean]
+v1.0.0
+
+Error:
+  ✗ Sorry, the jjj command is not supported.
+
+```
 
 ![Example](https://raw.githubusercontent.com/idancali/slana/master/examples/main.2.gif)
 
 **Command Execution**
 
+```javascript
+$ greeter hello
+Hello there
+$ greeter hello -n Dan
+Hello Dan
+$ greeter bye
+Goodbye now
+$ greeter bye -n Dan
+Goodbye Dan
+$ greeter bye -s -n Dan
+GOODBYE DAN
+```
+
 ![Example](https://raw.githubusercontent.com/idancali/slana/master/examples/main.3.gif)
 
 **Version Checking**
 
+```javascript
+$ greeter --version
+1.0.0
+```
 ![Example](https://raw.githubusercontent.com/idancali/slana/master/examples/main.4.gif)
 
 # The slana.yaml file format
