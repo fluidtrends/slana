@@ -1,7 +1,7 @@
-var savor = require('savor');
-var main  = savor.src('main');
+var savor = require("savor");
+var main  = savor.src("main");
 
-savor.add('should be able to extract a command without options', (context, done) => {
+savor.add("should be able to extract a command without options", (context, done) => {
   savor.addAsset("assets/exec-command-inventory.yml", "slana.yml", context);
   savor.addAsset("assets/valid-executor.js", "executor.js", context);
   savor.addAsset("assets/valid-package.json", "package.json", context);
@@ -10,7 +10,7 @@ savor.add('should be able to extract a command without options', (context, done)
   // Create a mock command line
   var cli = {argv: { _ : [ "hey" ] }, option: function() {} };
 
-  // Let's extract the command
+  // Let"s extract the command
   var command =  main.extractCommand(cli, inventory);
   context.expect(command).to.exist;
   context.expect(command.name).to.equal("hey");
@@ -23,7 +23,7 @@ savor.add('should be able to extract a command without options', (context, done)
   done();
 }).
 
-add('should be able to extract a command with options', (context, done) => {
+add("should be able to extract a command with options", (context, done) => {
   savor.addAsset("assets/exec-command-inventory.yml", "slana.yml", context);
   savor.addAsset("assets/valid-executor.js", "executor.js", context);
   savor.addAsset("assets/valid-package.json", "package.json", context);
@@ -32,7 +32,7 @@ add('should be able to extract a command with options', (context, done) => {
   // Create a mock command line
   var cli = {argv: { _ : [ "hello" ] }};
 
-  // Let's extract the command
+  // Let"s extract the command
   var command =  main.extractCommand(cli, inventory);
   context.expect(command).to.exist;
   context.expect(command.name).to.equal("hello");
@@ -41,7 +41,7 @@ add('should be able to extract a command with options', (context, done) => {
   done();
 }).
 
-add('should be able to parse command options', (context, done) => {
+add("should be able to parse command options", (context, done) => {
   savor.addAsset("assets/exec-command-inventory.yml", "slana.yml", context);
   savor.addAsset("assets/valid-executor.js", "executor.js", context);
   savor.addAsset("assets/valid-package.json", "package.json", context);
@@ -50,7 +50,7 @@ add('should be able to parse command options', (context, done) => {
   // Create a mock command line
   var cli = {argv: { _ : [ "hello" ] }, option: function() {} };
 
-  // Let's parse the command and its options
+  // Let"s parse the command and its options
   var command = main.parseCommand(inventory.commands[1], cli, context.dir);
   context.expect(command).to.exist;
   context.expect(command.name).to.equal("hello");
@@ -58,7 +58,7 @@ add('should be able to parse command options', (context, done) => {
   done();
 }).
 
-add('should be able to execute a command', (context, done) => {
+add("should be able to execute a command", (context, done) => {
   savor.addAsset("assets/exec-command-inventory.yml", "slana.yml", context);
   savor.addAsset("assets/valid-executor.js", "executor.js", context);
   savor.addAsset("assets/valid-package.json", "package.json", context);
@@ -67,7 +67,7 @@ add('should be able to execute a command', (context, done) => {
   // Create a mock command line
   var cli = {argv: { _ : [ "hello" ] }, option: function() {}, command: function () {} };
 
-  // Let's execute the command
+  // Let"s execute the command
   main.executeCommand(inventory, cli, context.dir);
 
   done();

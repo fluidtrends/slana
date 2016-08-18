@@ -1,7 +1,7 @@
-var savor = require('savor');
-var main  = savor.src('main');
+var savor = require("savor");
+var main  = savor.src("main");
 
-savor.add('should load a valid package', (context, done) => {
+savor.add("should load a valid package", (context, done) => {
   // Use a mock inventory
   var inventory = {name: "greeter"};
 
@@ -13,4 +13,4 @@ savor.add('should load a valid package', (context, done) => {
   done();
 }).
 
-run('Package Loading');
+run("Package Loading");
