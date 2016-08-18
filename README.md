@@ -36,6 +36,55 @@ The first thing you need to do is to add a ```bin``` entry to your module's ```p
 
 Now simply add a ```slana.yaml``` file to your module's root directory, where you will tell Slana what your command-line tool does. Read on for the ```slana.yaml``` file format.
 
+# The slana.yaml file format
+
+The ```slana.yaml``` format is based on the YAML format and it has two main sections: the ```name``` of your command-line tool and the ```commands``` your tool supports. Each of these sections are mandatory and if you forget to include either one of them, Slana will complain.
+
+## Name
+
+The ```name``` is a string that tells Slana what your command-line tool will be called. This will end up being the name of your binary executable. It could be the same as your module name, or it could be different. It's up to you. You must ensure that this name is defined in your list of binaries in your manifest, as outlined above in **STEP 1**.
+
+**Example:**
+
+```yaml
+name: my-tool
+```
+
+## Commands
+
+The ```commands``` section is a list of one or more commands that you want your command-line tool to support. Each command has a ```name```, a ```description```, an ```executor``` and may or may not have ```options```.
+
+**Example:**
+
+```yaml
+commands:
+- name: hello-world
+  description: This greets everyone in the world
+  executor: general-executor
+- name: hello
+  description: This commands says hello
+  executor: main-executor
+  options:
+  - name: name
+    alias: n
+    description: The person we want to greet
+    default: there
+    type: string
+- name: bye
+  description: This commands says goodbye
+  executor: main-executor
+  options:
+  - name: name
+    alias: n
+    description: The person we want to greet
+    default: now
+    type: string
+  - name: shout
+    alias: s
+    description: Shout the goodbye
+    type: boolean
+```
+
 # Example Usage
 
 **Friendly Help Usage**
@@ -114,55 +163,6 @@ $ greeter --version
 1.0.0
 ```
 ![Example](https://raw.githubusercontent.com/idancali/slana/master/examples/main.4.gif)
-
-# The slana.yaml file format
-
-The ```slana.yaml``` format is based on the YAML format and it has two main sections: the ```name``` of your command-line tool and the ```commands``` your tool supports. Each of these sections are mandatory and if you forget to include either one of them, Slana will complain.
-
-## Name
-
-The ```name``` is a string that tells Slana what your command-line tool will be called. This will end up being the name of your binary executable. It could be the same as your module name, or it could be different. It's up to you. You must ensure that this name is defined in your list of binaries in your manifest, as outlined above in **STEP 1**.
-
-**Example:**
-
-```yaml
-name: my-tool
-```
-
-## Commands
-
-The ```commands``` section is a list of one or more commands that you want your command-line tool to support. Each command has a ```name```, a ```description```, an ```executor``` and may or may not have ```options```.
-
-**Example:**
-
-```yaml
-commands:
-- name: hello-world
-  description: This greets everyone in the world
-  executor: general-executor
-- name: hello
-  description: This commands says hello
-  executor: main-executor
-  options:
-  - name: name
-    alias: n
-    description: The person we want to greet
-    default: there
-    type: string
-- name: bye
-  description: This commands says goodbye
-  executor: main-executor
-  options:
-  - name: name
-    alias: n
-    description: The person we want to greet
-    default: now
-    type: string
-  - name: shout
-    alias: s
-    description: Shout the goodbye
-    type: boolean
-```
 
 # The Slana API
 
