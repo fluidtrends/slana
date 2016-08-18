@@ -1,6 +1,6 @@
 {
   "name": "slana",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "Slana turns your Node module into a command-line tool",
   "main": "index.js",
   "scripts": {
@@ -37,6 +37,6 @@
     "yargs": "^4.8.1"
   },
   "devDependencies": {
-    "savor": "^0.1.0"
+    "savor": "^0.2.0"
   }
 }
