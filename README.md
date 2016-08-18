@@ -28,7 +28,7 @@ The first thing you need to do is to add a ```bin``` entry to your module's ```p
 
 ```javascript
 "bin" : {
-  "my-tool" : "./node_modules/slana/bin/cli.js"
+  "my-tool" : ".bin/slana"
 }
 ```
 
