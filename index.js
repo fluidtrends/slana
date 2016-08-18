@@ -16,6 +16,7 @@ function run (dir) {
   }
 }
 
+
 module.exports = {
   stopWithError: function(error) { return main.stopWithError(error) },
   loadInventory: function(dir) { return main.loadInventory(dir) },

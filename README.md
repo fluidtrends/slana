@@ -92,14 +92,12 @@ And then you can use any of the exported functions available:
 
 ```javascript
 stopWithError (error)
-loadInventory()
-initializeCLI(inventory)
-executeCommand(inventory, cli)
-runCommandExecutor(command, executor)
-parseCommand(command, cli)
-parseCommandOptions(command, cli)
-extractCommand(cli, inventory)
-run()
+loadInventory(dir)
+initializeCLI(inventory, dir)
+executeCommand(inventory, cli, dir)
+sparseCommand(command, cli, dir)
+extractCommand(cli, inventory, dir)
+run(dir)
 ```
 
 In most cases you probably just wanna do this:
@@ -108,7 +106,7 @@ In most cases you probably just wanna do this:
 #!/usr/bin/env node
 
 var slana = require('slana');
-slana.run();
+slana.run(process.cwd());
 ```
 
 # License

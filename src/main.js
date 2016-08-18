@@ -100,7 +100,7 @@ function initializeCLI(inventory, dir) {
   }
 
   // This is a generic usage header that will prefix the help message
-  var usage = "<command> [options]";
+  var usage = "<" + out.bold("command") + "> [" + out.bold("options") + "]";
 
   // Let's tell yargs what we're looking for based on our inventory
   return yargs.
@@ -194,10 +194,10 @@ function parseCommand (command, cli, dir) {
   Object.keys(cmd.options).forEach(optionKey => {
     if (cmd.options[optionKey].alias) {
       // Include the options and the alias, if any, in the command help message
-      cmd.description = "[--" + optionKey + ", -" + cmd.options[optionKey].alias + "] " + cmd.description;
+      cmd.description = "[--" + out.bold(optionKey) + ", -" + out.bold(cmd.options[optionKey].alias) + "] " + cmd.description;
     } else {
       // Include the options without alias
-      cmd.description = "[--" + optionKey + " " + cmd.description;
+      cmd.description = "[--" + out.bold(optionKey) + "] " + cmd.description;
     }
   });
 
@@ -217,7 +217,6 @@ function parseCommandOptions(command, cli) {
       options[option.name]["type"]     = option.type;
 
       cli.option(option.name, {
-        alias: option.alias,
         default: option.default,
         describe: option.description,
         type: option.type

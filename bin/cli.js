@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
 var slana = require('../');
-slana.run();
+slana.run(process.cwd());

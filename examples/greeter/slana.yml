@@ -13,7 +13,7 @@ commands:
     default: there
     type: string
 - name: bye
-  description: This commands says goodbye
+  description: This command says goodbye
   executor: main-executor
   options:
   - name: name
@@ -24,4 +24,7 @@ commands:
   - name: shout
     alias: s
     description: Shout the goodbye
+    type: boolean
+  - name: quiet
+    description: Say it quietly
     type: boolean
