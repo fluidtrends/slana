@@ -40,7 +40,7 @@ Now simply add a ```slana.yaml``` file to your module's root directory, where yo
 
 **Friendly Help Usage**
 
-```javascript
+```
 Usage:
  greeter <command> [options]
 
@@ -62,7 +62,7 @@ v1.0.0
 
 **Unknown Command Handling**
 
-```javascript
+```
 $ greeter jjj
 
 Usage:
@@ -90,7 +90,7 @@ Error:
 
 **Command Execution**
 
-```javascript
+```
 $ greeter hello
 Hello there
 $ greeter hello -n Dan
@@ -107,7 +107,7 @@ GOODBYE DAN
 
 **Version Checking**
 
-```javascript
+```
 $ greeter --version
 1.0.0
 ```
