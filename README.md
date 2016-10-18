@@ -10,7 +10,9 @@
 [![Version](https://img.shields.io/npm/v/slana.svg)](https://www.npmjs.com/package/slana)
 [![Build Status](https://travis-ci.org/idancali/slana.svg?branch=master)](https://travis-ci.org/idancali/slana)
 [![Coverage Status](https://coveralls.io/repos/github/idancali/slana/badge.svg?branch=master)](https://coveralls.io/github/idancali/slana?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0c0a4521514040f5aabfe6ca4b520bcb)](https://www.codacy.com/app/dancali/slana?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=idancali/slana&amp;utm_campaign=Badge_Grade) [![Author](https://img.shields.io/badge/say%20hi-%40idancali-green.svg)](https://twitter.com/idancali) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fidancali%2Fsavor&via=idancali&text=Add%20more%20flavor%20to%20your%20Node%20module%20%28test%2C%20coverage%2C%20analysis%29.&hashtags=savor%2C%20opensource&)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0c0a4521514040f5aabfe6ca4b520bcb)](https://www.codacy.com/app/dancali/slana?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=idancali/slana&amp;utm_campaign=Badge_Grade) 
+[![Author](https://img.shields.io/badge/say%20hi-%40idancali-green.svg)](https://twitter.com/idancali) 
+[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A//github.com/idancali/slana&text=Slana%20Fattens%20Up%20Your%20Node%20Module%20With%20Delicious%20CLI%20Abilities%20%23slana%20%23opensource%20via%20%40idancali%0A%0A%23nodejs%20%23javascript)
 
 # Installation
 
