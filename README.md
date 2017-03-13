@@ -38,7 +38,12 @@ Now simply add a ```slana.yaml``` file to your module's root directory, where yo
 
 # The slana.yaml file format
 
-The ```slana.yaml``` format is based on the YAML format and it has two main sections: the ```name``` of your command-line tool and the ```commands``` your tool supports. Each of these sections are mandatory and if you forget to include either one of them, Slana will complain.
+The ```slana.yaml``` format is based on the YAML format and it has two main sections:
+
+ * the ```name``` of your command-line tool
+ * the ```commands``` your tool supports.
+ 
+ Each of these sections are mandatory and if you forget to include either one of them, Slana will complain.
 
 ## Name
 
@@ -52,11 +57,16 @@ name: my-tool
 
 ## Commands
 
-The ```commands``` section is a list of one or more commands that you want your command-line tool to support. Each command has a ```name```, a ```description```, an ```executor``` and may or may not have ```options```.
+The ```commands``` section is a list of one or more commands that you want your command-line tool to support. Each command has:
+ * a ```name```
+ * a ```description```
+ * an ```executor```
+ * an optional ```options``` property.
 
 **Example:**
 
 ```yaml
+name: greeter
 commands:
 - name: hello-world
   description: This greets everyone in the world
