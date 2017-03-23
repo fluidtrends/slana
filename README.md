@@ -193,6 +193,15 @@ var slana = require('slana');
 slana.run(process.cwd());
 ```
 
+# Built with Slana
+
+## [translana](https://github.com/radubrehar/slana-translate-example)
+
+**translana** is a real-world CLI for demoing how Slana can be used for quickly building command-line apps.
+
+Do `npm i -g translana` and you'll be able to use `translana translate --text="How are you" to=fr` to translate text (it's using Google Translate API under-the-hood).
+
+
 # License
 
 Copyright (c) 2016 I. Dan Calinescu
