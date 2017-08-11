@@ -22,7 +22,7 @@ function stopWithError(error) {
     // Something went wrong at some point so we"re going to stop right away,
     // print out a nice error message and signal the parent process that we
     // stopped because of an error
-    process.stderr.write(`\n${out.red("Error:")}\n  ${out.red("✗")} ${out.bold(error.message)}\n\n`) && process.exit(1);
+    process.stderr.write(`\n${out.red("Error:")}\n  ${out.red("✗")} ${out.bold(error.message)}\n\n`);
 }
 
 function parseCommandOptionsAndExamples(command, cli) {    
@@ -79,7 +79,6 @@ function extractCommand(cli, inventory) {
         // Looks like we did not specify a command so let"s
         // just bail out with the usage message
         yargs.showHelp();
-        // process.exit(0);
         return;
     }
 
