@@ -28,7 +28,13 @@ function stopWithError(error) {
 function parseCommandOptionsAndExamples(command, cli) {    
     // var groupName =  out.bold("Command ") + out.green(command.name);
     // groupName = groupName + "\n" + "-".repeat(command.name.length + 8) + "\n";
-    var groupName =  exampleCounter + ". " + out.bold("Command ") + out.green.bold(command.name) + "\n";
+    var groupName =  exampleCounter + ". " + out.bold("Command ") + out.green.bold(command.name);
+    
+    if (command.more) {
+        groupName =  groupName + "\n\n" + " ".repeat(3) + out.grey(command.more);
+    }
+
+    groupName =  groupName + "\n";
     var options = {}
 
     if (command.options) {
@@ -92,7 +98,10 @@ function extractCommand(cli, inventory) {
     // We want to make sure that the command we've just parsed is one we support,
     // so to do that we"re going to look through our inventory and see if we can find it
     var unknown = true;
-    inventory.commands.forEach((cmd) => cmd.name.startsWith(command.name) ? unknown = false : null);
+    inventory.commands.forEach((cmd) => {
+        var cmdName = cmd.name.split(' ')[0];
+        (cmdName === command.name) ? unknown = false : null
+    });
 
     if (unknown) {
         // If this command is one we don"t support, let"s just stop now with a nice
@@ -104,7 +113,8 @@ function extractCommand(cli, inventory) {
     // We've now got ourselves a parsed command that we support so let's prepare it
     // for execution
     inventory.commands.forEach((cmd) => {
-        cmd.name === command.name && cmd.options &&
+        var cmdName = cmd.name.split(' ')[0];
+        cmdName === command.name && cmd.options &&
 
             // so first, let"s fill the command with all its expected options
             cmd.options.forEach((option) => command.options[option.name] = cli[option.name])
@@ -223,27 +233,21 @@ function parseCommand(command, cli, dir) {
     try {
         // Attempt to resolve the executor
         cmd.executor = require(path.join(dir, command.executor));
-
         if (typeof cmd.executor != "function") {
             // We need an executor function, not something else (ie. an object)
             throw new Error();
         }
     } catch (e) {
+        console.log(e)
         // Looks like the executor could not be resolved
         throw new Error(`Make sure the ${out.green(command.name)} command has a valid command executor`);
     }
 
     // Looks like this command has options, so let"s parse them
     Object.assign(cmd.options, parseCommandOptionsAndExamples(command, cli));
-    // parseCommandOptionsAndExamples(command, cli);
 
     // We"ve got ourselves a parsed command, ready for processing
     return cmd;
-}
-
-function runCommandExecutor(command, executor) {
-    // Let's attempt to execute the command now
-    executor(command);
 }
 
 function executeCommand(inventory, cli, dir) {
@@ -269,19 +273,11 @@ function executeCommand(inventory, cli, dir) {
         var cmd = parseCommand(command, cli, dir);
 
         // The command is ready to be added to the parser
-        cli.command(cmd.name, cmd.description, cmd.options);
-
-        // Keep track of this command"s executor
-        executors[cmd.name] = cmd.executor;
+        cli.command(cmd.name, out.grey(cmd.description), cmd.options, cmd.executor);
     });
 
     // We've got ourselves a command line now, so let"s extract the command
-    var command = extractCommand(cli, inventory);
-
-    if (command) {
-        // And finally, let"s execute it
-        runCommandExecutor(command, executors[command.name])
-    }
+    extractCommand(cli, inventory);
 }
 
 var slana = {

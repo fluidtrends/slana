@@ -1,6 +1,6 @@
 {
   "name": "slana",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Slana turns your Node module into a command-line tool",
   "main": "index.js",
   "scripts": {
