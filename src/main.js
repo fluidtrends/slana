@@ -92,7 +92,7 @@ function extractCommand(cli, inventory) {
     // We want to make sure that the command we've just parsed is one we support,
     // so to do that we"re going to look through our inventory and see if we can find it
     var unknown = true;
-    inventory.commands.forEach((cmd) => cmd.name === command.name ? unknown = false : null);
+    inventory.commands.forEach((cmd) => cmd.name.startsWith(command.name) ? unknown = false : null);
 
     if (unknown) {
         // If this command is one we don"t support, let"s just stop now with a nice
