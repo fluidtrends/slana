@@ -16,6 +16,9 @@ var fs = require("fs-extra");
 // Keep track of the root directory of our module,
 var rootDir = path.resolve(__dirname);
 
+// Displays fun boxes
+var boxen = require('boxen');
+
 var exampleCounter = 1
 
 function stopWithError(error) {
@@ -26,16 +29,18 @@ function stopWithError(error) {
 }
 
 function parseCommandOptionsAndExamples(command, cli) {    
-    // var groupName =  out.bold("Command ") + out.green(command.name);
-    // groupName = groupName + "\n" + "-".repeat(command.name.length + 8) + "\n";
-    var groupName =  exampleCounter + ". " + out.bold("Command ") + out.green.bold(command.name);
+    if (cli.argv._.length === 0 || cli.argv._[0] !== 'help') {
+        return {}
+    }
+
+    var options = {}
+    var groupName =  out.bold.green(command.name);
     
     if (command.more) {
         groupName =  groupName + "\n\n" + " ".repeat(3) + out.grey(command.more);
     }
 
     groupName =  groupName + "\n";
-    var options = {}
 
     if (command.options) {
         command.options.forEach((option) => {
@@ -52,7 +57,6 @@ function parseCommandOptionsAndExamples(command, cli) {
     }
 
     if (command.examples) {
-
         if (command.options) {
             cli.option("-".repeat(12), {
                 describe: "",
@@ -93,7 +97,12 @@ function extractCommand(cli, inventory) {
     var command = {
         name: cli._[0],
         options: {}
-    };
+    }
+
+    if (command.name === 'help') {
+        yargs.showHelp();
+        return;
+    }
 
     // We want to make sure that the command we've just parsed is one we support,
     // so to do that we"re going to look through our inventory and see if we can find it
@@ -200,6 +209,8 @@ function initializeCLI(inventory, dir) {
         throw new Error("Looks like your command-line tool name is not defined in your manifest");
     }
 
+    const showDetails = (yargs.argv._ && yargs.argv._.length > 0 && yargs.argv._[0] === 'help')
+
     // This is a generic usage header that will prefix the help message
     var usage = "<" + out.bold("command") + "> [" + out.bold("subcommand") + "] [" + out.bold("options") + "]";
 
@@ -213,7 +224,37 @@ function initializeCLI(inventory, dir) {
     wrap(0).
 
     // Insert the version from the package manifest, at the end of the usage message
-    epilog(`${out.gray("-".repeat(24) + "\n  Chunky\n  version ")}${out.gray(pkg.version + "\n" + "-".repeat(24) + "\n")}`);
+    epilog(epilog(pkg, showDetails, inventory));
+}
+
+function epilog(pkg, showDetails, inventory) {
+
+    const promptPrefix = "Type ";
+    const promptSuffix = " for detailed usage instructions, including useful examples.";
+    const promptSuffixAgain = " to see these detailed usage instructions again.";
+    const prompt = inventory.name + " help";
+
+    var text = "\n"
+    
+    if (showDetails) {
+        text = text + out.bold(promptPrefix) + out.green(prompt) + out.bold(promptSuffixAgain);
+        text = text + "\n" + out.bold("-".repeat(promptPrefix.length + prompt.length + promptSuffixAgain.length));
+    } else {
+        text = text + out.bold(promptPrefix) + out.green(prompt) + out.bold(promptSuffix);
+        text = text + "\n" + out.bold("-".repeat(promptPrefix.length + prompt.length + promptSuffix.length));        
+    }
+       
+    if (inventory.footer && inventory.footer.text) {
+        text = text + "\n\n"
+        if (inventory.footer.suffix) {
+            text = text + out.yellow(inventory.footer.suffix) + " "
+        }
+        text = text + out.grey(inventory.footer.text)
+    }
+
+    text = text + "\n\n" + out.grey("v" + pkg.version);
+
+    return text
 }
 
 function parseCommand(command, cli, dir) {
@@ -238,7 +279,6 @@ function parseCommand(command, cli, dir) {
             throw new Error();
         }
     } catch (e) {
-        console.log(e)
         // Looks like the executor could not be resolved
         throw new Error(`Make sure the ${out.green(command.name)} command has a valid command executor`);
     }
@@ -295,6 +335,9 @@ var slana = {
     },
     parseCommand: function(command, cli, dir) {
         return parseCommand(command, cli, dir)
+    },
+    epilog: function() {
+        return epilog()
     },
     extractCommand: function(cli, inventory, dir) {
         return extractCommand(cli, inventory, dir)
