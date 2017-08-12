@@ -29,10 +29,6 @@ function stopWithError(error) {
 }
 
 function parseCommandOptionsAndExamples(command, cli) {    
-    if (cli.argv._.length === 0 || cli.argv._[0] !== 'help') {
-        return {}
-    }
-
     var options = {}
     var groupName =  out.bold.green(command.name);
     
@@ -56,7 +52,7 @@ function parseCommandOptionsAndExamples(command, cli) {
         });
     }
 
-    if (command.examples) {
+    if (command.examples && cli.argv._.length > 0 && cli.argv._[0] === 'help') {
         if (command.options) {
             cli.option("-".repeat(12), {
                 describe: "",
