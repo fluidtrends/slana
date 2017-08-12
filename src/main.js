@@ -246,10 +246,9 @@ function epilog(pkg, showDetails, inventory) {
        
     if (inventory.footer && inventory.footer.text) {
         text = text + "\n\n"
-        if (inventory.footer.suffix) {
-            text = text + out.yellow(inventory.footer.suffix) + " "
-        }
-        text = text + out.grey(inventory.footer.text)
+        var footer = (inventory.footer.suffix ? out.yellow(inventory.footer.suffix) + " " : "");
+        footer = footer + out.grey(inventory.footer.text);
+        text = text + boxen(footer, { padding: 1, margin: 0, borderStyle: 'round', dimBorder: true })
     }
 
     text = text + "\n\n" + out.grey("v" + pkg.version);
