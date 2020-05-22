@@ -130,7 +130,8 @@ export function parseCommand(command: Command, cli: any, dir: string) {
 
     try {
         // Attempt to resolve the executor
-        cmd.executor = require(path.join(dir, command.executor));
+        cmd.executor = require(path.join(dir, command.executor)).default;
+
         if (typeof cmd.executor != "function") {
             // We need an executor function, not something else (ie. an object)
             throw new Error();
