@@ -1,6 +1,6 @@
 {
   "name": "slana",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Slana turns your Node module into a command-line tool",
   "scripts": {
     "build": "savor build",
