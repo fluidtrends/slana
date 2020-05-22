@@ -49,7 +49,7 @@ export function parseCommandOptionsAndExamples(command: any, cli: any) {
         command.examples.forEach((example: Example) => {
             if (example.command) {
                 cli.option("➔ " + out.yellow("Example " + exampleCounter + "." + counter + ":") + "\n", {
-                    describe:  out.green("chunky " + example.command) + "\n ↳ "  + out.grey(example.description || "") ,
+                    describe:  out.green(example.command) + "\n ↳ "  + out.grey(example.description || "") ,
                     group: groupName
                 });
                 counter = counter + 1;
